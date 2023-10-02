@@ -58,4 +58,4 @@ fmt-all:
 
 .PHONY: tests
 tests:
-	pytest
+	pytest --verbose

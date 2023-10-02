@@ -15,7 +15,7 @@ jobs:
         python-version: [3.9]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       # this fixes local act bug of python setup
       - name: local act python setup fix
         run: |
@@ -25,7 +25,7 @@ jobs:
             echo "DISTRIB_RELEASE=18.04" > /etc/lsb-release
           fi
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Poetry
@@ -36,6 +36,11 @@ jobs:
         run: |
           python -m poetry config virtualenvs.in-project true
 
+      - name: Cache the virtualenv
+        uses: actions/cache@v3
+        with:
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Dependencies
         run:  make deps-prod
