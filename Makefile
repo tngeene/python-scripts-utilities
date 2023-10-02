@@ -8,7 +8,7 @@ help:
 	@echo "  install-poetry    	install poetry dependency manager."
 	@echo "  uninstall-poetry  	uninstalls poetry if things go wrong."
 	@echo "  pip-freeze  		output the contents of the pyproject.toml into a requirements.txt file"
-	@echo "  pytest  		    run all test cases"
+	@echo "  tests  		    run all test cases"
 
 
 # poetry installation
@@ -57,6 +57,6 @@ hooks:
 fmt-all:
 	pre-commit run --all-files
 
-.PHONY: pytest
-pytest:
+.PHONY: tests
+tests:
 	pytest
